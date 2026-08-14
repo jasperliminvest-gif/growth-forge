@@ -310,6 +310,41 @@
   .visually-hidden{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
   /* ==========================================================
+     IMAGES
+     Safe defaults so a large photo can never overflow the page.
+     Always set width/height attributes on the tag as well: the
+     browser reserves the space before the file loads, which stops
+     the layout jumping (and Google scores that as a ranking factor).
+     ========================================================== */
+  img{ max-width:100%; height:auto; display:block; }
+
+  /* Framed image, matching the card styling used elsewhere. */
+  .media{
+    border-radius:12px; border:1px solid var(--border);
+    box-shadow:var(--shadow); overflow:hidden; background:var(--bg-elevated);
+  }
+  .media img{ width:100%; }
+  figure{ margin:0; }
+  figcaption{ color:var(--text-muted); font-size:0.82rem; margin-top:0.6rem; }
+
+  /* Fixed-ratio crop, so mismatched photo sizes still line up in a grid. */
+  .media-4x3 img{ aspect-ratio:4 / 3; object-fit:cover; }
+  .media-16x9 img{ aspect-ratio:16 / 9; object-fit:cover; }
+  .media-square img{ aspect-ratio:1 / 1; object-fit:cover; }
+
+  /* Small round photo for testimonials. */
+  .avatar{
+    width:44px; height:44px; border-radius:50%; object-fit:cover;
+    border:1px solid var(--border); flex:none;
+  }
+  /* Only switch to a flex row once a photo is actually present, so
+     existing text-only credits keep their current spacing. */
+  blockquote footer:has(.avatar){ display:flex; align-items:center; gap:0.7rem; }
+
+  /* Logo lockup in the header. */
+  .brand-logo{ height:28px; width:auto; }
+
+  /* ==========================================================
      DEVICE TIERS
      Laptop/desktop  : 1025px and up   (base styles above)
      Tablet          : 601px - 1024px
