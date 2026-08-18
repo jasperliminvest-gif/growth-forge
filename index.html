@@ -181,13 +181,15 @@
   .hero .lede{ margin-top:1.1rem; color:var(--text-muted); font-size:1.08rem; }
   .hero .cta-row{ display:flex; gap:0.8rem; margin-top:1.8rem; flex-wrap:wrap; }
   .forge-embers{
-    width:100%; height:280px; border-radius:12px; border:1px solid var(--border);
-    overflow:hidden; position:relative;
-    /* Dark ground so the transparent embers read as a forge interior,
-       and a visible resting state if the animation never loads. */
-    background:
-      radial-gradient(120% 90% at 50% 100%, rgba(218,90,34,0.30) 0%, rgba(218,90,34,0.06) 45%, transparent 70%),
-      linear-gradient(180deg, #14161F 0%, #1C1F2B 100%);
+    width:100%; height:300px; position:relative; overflow:hidden;
+    /* No panel, no border: the artwork sits straight on the page so the
+       charcoal and embers read as part of the layout, not a pasted-in box. */
+    background:transparent;
+    /* The square artwork is scaled to fill the width, so its top is cropped.
+       Fading that edge lets the rising embers dissolve into the page instead
+       of being sliced off against a hard line. */
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%);
+    mask-image:linear-gradient(to bottom, transparent 0%, #000 26%, #000 100%);
   }
   .forge-embers svg{ display:block; width:100% !important; height:100% !important; }
   .forge-embers > svg{ opacity:0; transition:opacity .45s ease; }
@@ -407,7 +409,7 @@
     .hero .lede{ font-size:1rem; }
     .hero .cta-row{ margin-top:1.4rem; }
     .hero .cta-row .btn{ flex:1 1 100%; justify-content:center; }
-    .forge-embers{ height:190px; }
+    .forge-embers{ height:200px; }
 
     /* Three cramped columns become a readable stacked list. */
     .stat-row{
